@@ -36,11 +36,20 @@ typedef struct fuel{
 }Fuel;
 
 
-
 void init(map<int,Client>& c, map<int,Fuel>& f);
 void printClient(map<int,Client>&c);
 
 int main() {
+
+    int opcao;
+    cout<<"-------------------MENU----------------------\n";
+    cout<<"1.Cadastrar venda realizada\n";
+    cout<<"2.Verificar venda\n";
+    cout<<"3.Verificar compras de cliente\n";
+    cout<<"4.Gerar dados automaticamente\n";
+    cout<<"---------------------------------------------\n";
+    cin>> opcao;
+
     map<int,Client>client;
     map<int,Fuel>fuel;
 
