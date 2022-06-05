@@ -68,12 +68,12 @@ int randomId()
 }
 
 
-void cadastrarUsuario(){
+void cadastrarUsuario(map<int, Client>&client){
     system("clear||cls");
     string nome;
     bool ativo;
     Client novo;
-    map<int, Client> Client;
+
 
 
     cout<<"-------------Cadastrar venda---------------\n";
@@ -87,13 +87,13 @@ void cadastrarUsuario(){
     novo.code = id++;
     novo.name = nome;
     novo.active = ativo;
-    Client[novo.code] = novo;
+    client[novo.code] = novo;
     system("clear||cls");
 }
 
 int menu(){
 
-int opcao;
+   int opcao;
     cout<<"-------------------MENU----------------------\n";
     cout<<"1.Cadastrar usuário\n";
     cout<<"2.Cadastrar venda\n";
@@ -101,12 +101,25 @@ int opcao;
     cout<<"4.Verificar \n";
     cout<<"4.Teste random value \n";
     cout<<"---------------------------------------------\n";
-cin>> opcao;
+    cin >> opcao;
+
+
+
+    return opcao;
+}
+
+int main() {
+    int opcao  = menu();
+
+    map<int,Client>client;
+    map<int,Fuel>fuel;
+
+
 
 
     switch(opcao){
         case 1:
-               cadastrarUsuario();
+               cadastrarUsuario(client);
             break;
 
         case 2:
@@ -121,16 +134,6 @@ cin>> opcao;
                 cout<< value;
             break;
     }
-
-}
-
-int main() {
-
-    menu();
-
-    map<int,Client>client;
-    map<int,Fuel>fuel;
-
     init(client,fuel);
     listClient(client);
     listFuel(fuel);
@@ -139,9 +142,9 @@ int main() {
 void listClient(map<int,Client>&client){
     cout << "\n  Clientes \n\n";
     for(auto i: client){
-        if(i.second.active){
+
         i.second.print();
-        }
+
     }
 }
 
