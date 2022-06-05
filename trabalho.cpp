@@ -142,9 +142,9 @@ int main() {
 void listClient(map<int,Client>&client){
     cout << "\n  Clientes \n\n";
     for(auto i: client){
-
+        if(i.second.active){
         i.second.print();
-
+        }
     }
 }
 
