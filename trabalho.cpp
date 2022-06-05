@@ -52,15 +52,14 @@ typedef struct sales{
         cout << "Data: " << date.day <<"/"<< date.month <<"/" << date.year<< ", Codigo do cliente: "
         << cliente.code << ", Codigo do combustivel: "<< combustivel.code<< ", Quantidade: " << theAmount
         << ", Valor do litro: " << literValue << ", Total: "<< total << ", Reponsavel: "<< responsible
-        << ", Pago: " << paidOut << ";"<< endl;
+        << ", Pago: " << (paidOut ? "Sim" : "Nao") << ";"<< endl;
         }
 }Sales;
 
 void init(map<int,Client>& c, map<int,Fuel>& f);
-void printClient(map<int,Client>&c);
 void listFuel(map<int,Fuel>&fuel);
 void listClient(map<int,Client>&Client);
-void listarVendas(map<int,Sales>&sales);
+void listSales(map<int,Sales>&sales);
 
 int randomId()
 {
@@ -69,13 +68,13 @@ int randomId()
     return randomNumber;
 }
 
-void cadastrarUsuario()
+void cadastrarUsuario(map<int, Client>&client)
 {
     system("clear||cls");
     string nome;
     bool ativo;
     Client novo;
-    map<int, Client> Client;
+
 
 
     cout<<"-------------Cadastrar usuário---------------\n";
@@ -89,10 +88,10 @@ void cadastrarUsuario()
     novo.code = id++;
     novo.name = nome;
     novo.active = ativo;
-    Client[novo.code] = novo;
+    client[novo.code] = novo;
 }
 
-void cadastrarVenda()
+void cadastrarVenda(map<int,Sales>&sales)
 {
     system("clear||cls");
     int idCliente;
@@ -125,11 +124,22 @@ void cadastrarVenda()
     venda.date.month = mes;
     venda.date.year = ano;
 
+
+    sales[idCliente] = venda;
 }
 
-int menu(){
 
-int opcao;
+int main() {
+    map<int,Client>client;
+    map<int,Fuel>fuel;
+    map<int,Sales>sales;
+    init(client,fuel);
+    int opcao;
+    bool sair = 1;
+
+    do{
+
+    int opcao;
     cout <<"-------------------MENU----------------------\n";
     cout <<"1.Cadastrar usuario\n";
     cout <<"2.Cadastrar venda\n";
@@ -137,42 +147,31 @@ int opcao;
     cout <<"4.Verificar clientes\n";
     cout <<"5.Verificar combustivel \n";
     cout <<"---------------------------------------------\n";
-cin >> opcao;
-
+    cin >> opcao;
 
     switch(opcao){
         case 1:
-               cadastrarUsuario();
+               cadastrarUsuario(client);
             break;
 
         case 2:
-                cadastrarVenda();
+                cadastrarVenda(sales);
             break;
 
         case 3:
-//               listSales();
+             listSales(sales);
             break;
         case 4:
-//                listClient();
+            listClient(client);
             break;
 
         case 5:
-  //              listFuel();
+            listFuel(fuel);
             break;
     }
-
-}
-
-int main() {
-    map<int,Client>client;
-    map<int,Fuel>fuel;
-    init(client,fuel);
-    bool sair = 1;
-
-    do{
-    system("clear||cls");
-    menu();
     }while(sair = 1);
+
+
 }
 
 void listClient(map<int,Client>&client){
@@ -189,6 +188,13 @@ void listClient(map<int,Client>&client){
 void listFuel(map<int,Fuel>&fuel){
     cout << "\n  Combustiveis \n\n";
     for(auto i: fuel){
+        i.second.print();
+    }
+}
+
+void listSales(map<int,Sales>&sales){
+    cout << "\n  Vendas \n\n";
+    for(auto i: sales){
         i.second.print();
     }
 }
