@@ -7,7 +7,7 @@ using namespace std;
 
 typedef struct date{
     int day;
-    double month;
+    int month;
     int year;
 }Date;
 
@@ -117,6 +117,14 @@ void init(map<int,Client>& c,map<int,Fuel>& f){
     f[fuel.code ].changeDatePrice.day = 31;
     f[fuel.code ].changeDatePrice.month = 11;
     f[fuel.code ].changeDatePrice.year = 2021;
+
+    fuel.code = 5122;
+    f[fuel.code ].code = 45689;
+    f[fuel.code ].name = "Etanol comum";
+    f[fuel.code ].price = 6.79;
+    f[fuel.code ].changeDatePrice.day = 14;
+    f[fuel.code ].changeDatePrice.month = 05;
+    f[fuel.code ].changeDatePrice.year = 2022;
 }
 
 void listFuel(map<int,Fuel>& f){
