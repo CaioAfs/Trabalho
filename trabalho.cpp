@@ -36,6 +36,7 @@ typedef struct fuel{
 }Fuel;
 
 typedef struct sales{
+    
     Client codeClient;
     Fuel codeFuel;
     bool paidOut;
@@ -57,6 +58,7 @@ void init(map<int,Client>& c, map<int,Fuel>& f);
 void printClient(map<int,Client>&c);
 void listFuel(map<int,Fuel>&fuel);
 void listClient(map<int,Client>&Client);
+void sales(map<int,Sales>&s,map<int,Client>& c,map<int,Fuel>& f);
 
 int main() {
 
@@ -71,11 +73,12 @@ int main() {
 
     map<int,Client>client;
     map<int,Fuel>fuel;
+    map<int,Sales>sales;
 
     init(client,fuel);
     listClient(client);
     listFuel(fuel);
-}
+   
 
 void listClient(map<int,Client>&client){
     cout << "\n  Clientes \n\n";
@@ -92,6 +95,7 @@ void listFuel(map<int,Fuel>&fuel){
         i.second.print();
     }
 }
+
 
 void init(map<int,Client>& c,map<int,Fuel>& f){
     Client client;
